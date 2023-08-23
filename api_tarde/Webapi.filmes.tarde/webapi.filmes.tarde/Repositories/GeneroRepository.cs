@@ -12,7 +12,7 @@ namespace webapi.filmes.tarde.Repositories
         /// Initial Catalog: Nome do banco de dados
         /// Autenticao
         /// - windows : integrated security = true
-        ///  -sqlServer : User Id sa =
+        ///  -sqlServer : User Id = sa; pwd= senha
         /// </summary>
         private string StringConexao = "Data Source = NOTE18-S15; Initial Catalog = Filmes_Tarde; User Id = sa; pwd = Senai@134";
         public void AtualizarIdCorpo(GeneroDomain genero)
@@ -28,6 +28,27 @@ namespace webapi.filmes.tarde.Repositories
         public GeneroDomain BuscarPorId(int id)
         {
             throw new NotImplementedException();
+            // List<GeneroDomain> ListaGeneros = new List<GeneroDomain>();
+
+            //using (SqlConnection con = new SqlConnection(StringConexao))
+            // {
+            //   string querySelectAll = "SELECT Genero where Genero.Id = '2' ";
+
+            //  con.Open();
+
+            // SqlDataReader rdr;
+
+            // using (SqlCommand cmd = new SqlCommand(querySelectAll, con))
+            //  {
+
+            //      rdr = cmd.ExecuteReader();
+
+
+            // }
+
+
+        }
+            //return Genero.Id;
         }
 
         public void Cadastrar(GeneroDomain novoGenero)
