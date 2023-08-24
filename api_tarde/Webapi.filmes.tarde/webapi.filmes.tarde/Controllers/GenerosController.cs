@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Cryptography.X509Certificates;
 using webapi.filmes.tarde.Domains;
 using webapi.filmes.tarde.Interfaces;
 using webapi.filmes.tarde.Repositories;
@@ -43,7 +44,16 @@ namespace webapi.filmes.tarde.Controllers
         {
             try
             {
+
+
+                // essa lista na frente significa que a lista que foi criada aqui será igual a lista
+                // do genero repository
+
                 //Cria uma lista para receber os generos
+                //   |
+                //   |
+                //   |
+                //  \/
                 List<GeneroDomain> listaGeneros = _generoRepository.ListarTodos();
 
                 //retorna o status code 200 ok e a lista de generos no formato JSON
@@ -55,6 +65,31 @@ namespace webapi.filmes.tarde.Controllers
                 return BadRequest(erro.Message);
             }
            
+        }
+
+        /// <summary>
+        /// endpoint que acessa o metodo de cadastrar genero
+        /// </summary>
+        /// <param name="novoGenero">Objeto recebido na requisicao</param>
+        /// <returns>status code</returns>
+        [HttpPost]
+        public IActionResult Post(GeneroDomain novoGenero)
+        {
+            try
+            {
+                //faz a chamada para o metodo cadastrado
+                _generoRepository.Cadastrar(novoGenero);
+
+                //retorna um status code
+                return Created("objeto criado", novoGenero);
+
+
+            }
+            catch (Exception erro)
+            {
+                //retorna um status code 400 - BadRequest e a mensagem de erro 
+                return BadRequest(erro.Message);
+            }
         }
     }
 }
