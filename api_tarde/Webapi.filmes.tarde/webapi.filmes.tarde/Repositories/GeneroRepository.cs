@@ -17,7 +17,10 @@ namespace webapi.filmes.tarde.Repositories
         private string StringConexao = "Data Source = NOTE18-S15; Initial Catalog = Filmes_Tarde; User Id = sa; pwd = Senai@134";
         public void AtualizarIdCorpo(GeneroDomain genero)
         {
-            throw new NotImplementedException();
+            using (SqlConnection con = new SqlConnection(StringConexao))
+            {
+                throw new NotImplementedException();
+            }
         }
 
         public void AtualizarIdUrl(int Id, GeneroDomain genero)
@@ -27,30 +30,34 @@ namespace webapi.filmes.tarde.Repositories
 
         public GeneroDomain BuscarPorId(int id)
         {
-            throw new NotImplementedException();
+
             // List<GeneroDomain> ListaGeneros = new List<GeneroDomain>();
 
-            //using (SqlConnection con = new SqlConnection(StringConexao))
-            // {
-            //   string querySelectAll = "SELECT Genero where Genero.Id = '2' ";
-
-            //  con.Open();
-
-            // SqlDataReader rdr;
-
-            // using (SqlCommand cmd = new SqlCommand(querySelectAll, con))
-            //  {
-
-            //      rdr = cmd.ExecuteReader();
+            using (SqlConnection con = new SqlConnection(StringConexao))
+            {
 
 
-            // }
 
+                string querySelectAll = $"SELECT Genero where {id} = '2' ";
+
+
+
+                using (SqlCommand cmd = new SqlCommand(querySelectAll, con))
+                {
+                    
+                    con.Open();
+                    SqlDataReader rdr;
+
+                    rdr = cmd.ExecuteReader();
+
+                    cmd.ExecuteNonQuery();
+                }
+
+
+            }
+            //return Genero.Id;
 
         }
-            //return Genero.Id;
-        
-
         /// <summary>
         /// Cadastrar um novo Genero
         /// </summary>
@@ -60,11 +67,14 @@ namespace webapi.filmes.tarde.Repositories
             using (SqlConnection con = new SqlConnection(StringConexao))
             {
                 //Declara a query que será executada
-                String queryInsert = "INSERT INTO Genero(Nome) VALUES (' "+ novoGenero.Nome +" ')";
+                String queryInsert = "INSERT INTO Genero(Nome) VALUES (@Nome)";
 
                 //declara o sqlcommand passando a query que sera executada e a conexaocom o bd
                 using (SqlCommand cmd = new SqlCommand(queryInsert,con))
                 {
+
+                    cmd.Parameters.AddWithValue("@Nome", novoGenero.Nome);
+
                     //Abre a conexao com o banco de dados
                     con.Open();
 
@@ -76,7 +86,31 @@ namespace webapi.filmes.tarde.Repositories
 
         public void Deletar(int id)
         {
-            throw new NotImplementedException();
+            using (SqlConnection con = new SqlConnection(StringConexao) )
+            {
+                
+                String queryDelete = $"DELETE FROM Genero WHERE {id} = IdGenero ";
+
+                using (SqlCommand cmd = new SqlCommand(queryDelete,con))
+                {
+                    con.Open();
+
+                    //Executa a query
+                    cmd.ExecuteNonQuery();
+                }
+
+
+
+                    
+
+                
+
+                
+
+
+            }
+
+
         }
 
 
