@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System.Security.Cryptography.X509Certificates;
+﻿using Microsoft.AspNetCore.Mvc;
 using webapi.filmes.tarde.Domains;
 using webapi.filmes.tarde.Interfaces;
 using webapi.filmes.tarde.Repositories;
@@ -14,7 +12,7 @@ namespace webapi.filmes.tarde.Controllers
     /// </summary>
     [Route("api/[controller]")]
 
-    
+
     ///Define que é um controlador de API
     [ApiController]
 
@@ -32,7 +30,7 @@ namespace webapi.filmes.tarde.Controllers
         /// </summary>
         public GenerosController()
         {
-            _generoRepository = new GeneroRepository();    
+            _generoRepository = new GeneroRepository();
         }
 
         /// <summary>
@@ -40,7 +38,7 @@ namespace webapi.filmes.tarde.Controllers
         /// </summary>
         /// <returns>Lista de gêneros e um status code</returns>
         [HttpGet]
-        public IActionResult Get() 
+        public IActionResult Get()
         {
             try
             {
@@ -64,7 +62,7 @@ namespace webapi.filmes.tarde.Controllers
                 //retorna um status code 400 - BadRequest e a mensagem de erro 
                 return BadRequest(erro.Message);
             }
-           
+
         }
 
         /// <summary>
@@ -93,15 +91,16 @@ namespace webapi.filmes.tarde.Controllers
         }
 
         //tem que expecificar que vai passar um id
-        [HttpDelete ("{id}")]
-        public IActionResult Delete (int id)
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
         {
             try
             {
                 _generoRepository.Deletar(id);
 
-                return Ok(id);
+                //return Ok(id);
 
+                return StatusCode(204);
             }
             catch (Exception erro)
             {
@@ -109,6 +108,31 @@ namespace webapi.filmes.tarde.Controllers
                 return BadRequest(erro.Message);
             }
 
+        }
+        /// <summary>
+        /// endpoint que busca por id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id}")]
+        public IActionResult BuscarPorId(int id)
+        {
+            try
+            {
+                GeneroDomain generoBuscado = _generoRepository.BuscarPorId(id);
+               
+
+                if (generoBuscado == null)
+                {
+                    return NotFound("id não encontrado!!!");
+                }
+                return StatusCode(200, generoBuscado);
+            }
+            catch (Exception erro)
+            {
+
+                return BadRequest(erro.Message);
+            }
         }
     }
 }

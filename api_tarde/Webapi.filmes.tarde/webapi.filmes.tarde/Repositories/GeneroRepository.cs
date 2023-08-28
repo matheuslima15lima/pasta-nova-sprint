@@ -14,12 +14,21 @@ namespace webapi.filmes.tarde.Repositories
         /// - windows : integrated security = true
         ///  -sqlServer : User Id = sa; pwd= senha
         /// </summary>
-        private string StringConexao = "Data Source = NOTE18-S15; Initial Catalog = Filmes_Tarde; User Id = sa; pwd = Senai@134";
+        private readonly string StringConexao = "Data Source = NOTE18-S15; Initial Catalog = Filmes_Tarde; User Id = sa; pwd = Senai@134";
         public void AtualizarIdCorpo(GeneroDomain genero)
         {
             using (SqlConnection con = new SqlConnection(StringConexao))
             {
-                throw new NotImplementedException();
+                String queryUpdateById = $"UPDATE Genero SET Nome WHERE IdGenero = @GeneroId";
+
+               
+                using (SqlCommand cmd = new SqlCommand(queryUpdateById, con))
+                {
+                    con.Open();
+                    cmd.Parameters.AddWithValue("@GeneroId", genero.IdGenero);
+                    cmd.ExecuteNonQuery();
+                }
+                //throw new NotImplementedException();
             }
         }
 
@@ -28,49 +37,60 @@ namespace webapi.filmes.tarde.Repositories
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Buscar um genero atraves do seu id
+        /// </summary>
+        /// <param name="id">Id do genero a ser buscado</param>
+        /// <returns></returns>
         public GeneroDomain BuscarPorId(int id)
         {
 
-            // List<GeneroDomain> ListaGeneros = new List<GeneroDomain>();
+           
 
-            using (SqlConnection con = new SqlConnection(StringConexao))
+            using SqlConnection con = new(StringConexao);
+
+            string queryFindById = $"SELECT idGenero, Nome FROM Genero WHERE IdGenero = {id} ";
+
+            using SqlCommand cmd = new(queryFindById, con);
+
+            con.Open();
+
+            SqlDataReader rdr;
+
+            rdr = cmd.ExecuteReader();
+
+            if (rdr.Read())
             {
-
-
-
-                string querySelectAll = $"SELECT Genero where {id} = '2' ";
-
-
-
-                using (SqlCommand cmd = new SqlCommand(querySelectAll, con))
+                //generoBuscado é a GeneroDomain
+                GeneroDomain generoBuscado = new GeneroDomain
                 {
-                    
-                    con.Open();
-                    SqlDataReader rdr;
+                    //atribui a propriedade IdGenero o valor da primeira coluna da tabela
+                    IdGenero = Convert.ToInt32(rdr[0]),
 
-                    rdr = cmd.ExecuteReader();
+                    //Atribui a propriedade nome ao valor da coluna nome
+                    Nome = rdr["Nome"].ToString()
+                };
 
-                    cmd.ExecuteNonQuery();
-                }
-
-
+            return generoBuscado;
             }
-            //return Genero.Id;
+            return null;
+            //return genero.Nome;
 
         }
+
         /// <summary>
         /// Cadastrar um novo Genero
         /// </summary>
         /// <param name="novoGenero">Objeto com as informacoes que serao cadastradas</param>
         public void Cadastrar(GeneroDomain novoGenero)
         {
-            using (SqlConnection con = new SqlConnection(StringConexao))
+            using (SqlConnection con = new(StringConexao))
             {
                 //Declara a query que será executada
                 String queryInsert = "INSERT INTO Genero(Nome) VALUES (@Nome)";
 
                 //declara o sqlcommand passando a query que sera executada e a conexaocom o bd
-                using (SqlCommand cmd = new SqlCommand(queryInsert,con))
+                using (SqlCommand cmd = new SqlCommand(queryInsert, con))
                 {
 
                     cmd.Parameters.AddWithValue("@Nome", novoGenero.Nome);
@@ -80,18 +100,20 @@ namespace webapi.filmes.tarde.Repositories
 
                     //Executa a query
                     cmd.ExecuteNonQuery();
+
                 }
             }
         }
 
         public void Deletar(int id)
         {
-            using (SqlConnection con = new SqlConnection(StringConexao) )
+
+            using (SqlConnection con = new SqlConnection(StringConexao))
             {
-                
+
                 String queryDelete = $"DELETE FROM Genero WHERE {id} = IdGenero ";
 
-                using (SqlCommand cmd = new SqlCommand(queryDelete,con))
+                using (SqlCommand cmd = new SqlCommand(queryDelete, con))
                 {
                     con.Open();
 
@@ -99,20 +121,8 @@ namespace webapi.filmes.tarde.Repositories
                     cmd.ExecuteNonQuery();
                 }
 
-
-
-                    
-
-                
-
-                
-
-
             }
-
-
         }
-
 
         /// <summary>
         /// Listar todos os objetos do tipo genero 
@@ -121,7 +131,7 @@ namespace webapi.filmes.tarde.Repositories
         public List<GeneroDomain> ListarTodos()
         {
             //cria uma lista de generos onde sera armazenados os generos
-           List<GeneroDomain> ListaGeneros = new List<GeneroDomain>();
+            List<GeneroDomain> ListaGeneros = new List<GeneroDomain>();
 
             //Declara a SqlConnection passando a string de conexao como parametro
             using (SqlConnection con = new SqlConnection(StringConexao))
@@ -136,7 +146,7 @@ namespace webapi.filmes.tarde.Repositories
                 SqlDataReader rdr;
 
                 //Declara o SqlCommand passando a query que sera executada e a conexao
-                using (SqlCommand cmd = new SqlCommand(querySelectAll,con))
+                using (SqlCommand cmd = new SqlCommand(querySelectAll, con))
                 {
                     //Executa a query e armazena os dados no rdr
                     rdr = cmd.ExecuteReader();
@@ -163,5 +173,7 @@ namespace webapi.filmes.tarde.Repositories
             return ListaGeneros;
 
         }
+
     }
+   
 }

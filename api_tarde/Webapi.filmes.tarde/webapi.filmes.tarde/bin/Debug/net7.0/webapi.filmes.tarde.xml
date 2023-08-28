@@ -34,6 +34,13 @@
             <param name="novoGenero">Objeto recebido na requisicao</param>
             <returns>status code</returns>
         </member>
+        <member name="M:webapi.filmes.tarde.Controllers.GenerosController.BuscarPorId(System.Int32)">
+            <summary>
+            endpoint que busca por id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <member name="T:webapi.filmes.tarde.Domains.GeneroDomain">
             <summary>
             Classe que representa a entidade(Tabela) Genero
@@ -92,6 +99,13 @@
             - windows : integrated security = true
              -sqlServer : User Id = sa; pwd= senha
             </summary>
+        </member>
+        <member name="M:webapi.filmes.tarde.Repositories.GeneroRepository.BuscarPorId(System.Int32)">
+            <summary>
+            Buscar um genero atraves do seu id
+            </summary>
+            <param name="id">Id do genero a ser buscado</param>
+            <returns></returns>
         </member>
         <member name="M:webapi.filmes.tarde.Repositories.GeneroRepository.Cadastrar(webapi.filmes.tarde.Domains.GeneroDomain)">
             <summary>
