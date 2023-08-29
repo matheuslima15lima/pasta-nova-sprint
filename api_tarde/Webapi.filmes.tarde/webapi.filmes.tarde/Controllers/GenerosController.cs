@@ -2,6 +2,7 @@
 using webapi.filmes.tarde.Domains;
 using webapi.filmes.tarde.Interfaces;
 using webapi.filmes.tarde.Repositories;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace webapi.filmes.tarde.Controllers
 {
@@ -120,13 +121,74 @@ namespace webapi.filmes.tarde.Controllers
             try
             {
                 GeneroDomain generoBuscado = _generoRepository.BuscarPorId(id);
-               
+
 
                 if (generoBuscado == null)
                 {
                     return NotFound("id não encontrado!!!");
                 }
                 return StatusCode(200, generoBuscado);
+            }
+            catch (Exception erro)
+            {
+
+                return BadRequest(erro.Message);
+            }
+        }
+
+        [HttpPut]
+        public IActionResult PutIdBody(GeneroDomain genero)
+        {
+            try
+            {
+                GeneroDomain generoBuscado = _generoRepository.BuscarPorId(genero.IdGenero);
+
+                if (generoBuscado != null)
+                {
+                    try
+                    {
+                        _generoRepository.AtualizarIdCorpo(genero);
+
+                        return NoContent();
+                    }
+                    catch (Exception erro)
+                    {
+
+                        return BadRequest(erro.Message);
+                    }
+
+
+                }
+                return NotFound("Genero não encontrado !");
+            }
+            catch (Exception erro)
+            {
+
+                return BadRequest(erro.Message);
+            }
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult PutIdUrl(int id,GeneroDomain genero)
+        {
+            try
+            {
+                GeneroDomain generoBuscado = _generoRepository.BuscarPorId(id);
+
+                if (generoBuscado != null)
+                {
+                    try
+                    {
+                        _generoRepository.AtualizarIdUrl(id, genero);
+                        return NoContent();
+                    }
+                    catch (Exception erro)
+                    {
+
+                        return BadRequest(erro.Message);
+                    }
+                }
+                return NotFound("gênero não encontrado !!!");
             }
             catch (Exception erro)
             {

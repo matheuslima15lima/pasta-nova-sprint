@@ -15,26 +15,54 @@ namespace webapi.filmes.tarde.Repositories
         ///  -sqlServer : User Id = sa; pwd= senha
         /// </summary>
         private readonly string StringConexao = "Data Source = NOTE18-S15; Initial Catalog = Filmes_Tarde; User Id = sa; pwd = Senai@134";
+       
+        /// <summary>
+        /// Atualizar um genero passando seu id pelo corpo da requisicao
+        /// </summary>
+        /// <param name="genero"></param>
         public void AtualizarIdCorpo(GeneroDomain genero)
         {
             using (SqlConnection con = new SqlConnection(StringConexao))
             {
-                String queryUpdateById = $"UPDATE Genero SET Nome WHERE IdGenero = @GeneroId";
+                String queryUpdateIdBody = $"UPDATE Genero SET Nome = @Nome  WHERE IdGenero = @IdGenero";
 
                
-                using (SqlCommand cmd = new SqlCommand(queryUpdateById, con))
-                {
+                using (SqlCommand cmd = new SqlCommand(queryUpdateIdBody, con))
+               {
                     con.Open();
-                    cmd.Parameters.AddWithValue("@GeneroId", genero.IdGenero);
+
+                    //passa os valores dos parametros
+                    cmd.Parameters.AddWithValue("@Nome", genero.Nome);
+                    cmd.Parameters.AddWithValue("@IdGenero", genero.IdGenero);
                     cmd.ExecuteNonQuery();
-                }
+
+                   
+               }
+                
                 //throw new NotImplementedException();
             }
         }
 
-        public void AtualizarIdUrl(int Id, GeneroDomain genero)
+        public void AtualizarIdUrl(int id, GeneroDomain genero)
         {
-            throw new NotImplementedException();
+            using (SqlConnection con = new SqlConnection(StringConexao))
+            {
+                String queryUpdateUrl = $"UPDATE Genero SET Nome = @Nome  WHERE IdGenero = @IdGenero";
+
+
+                using (SqlCommand cmd = new SqlCommand(queryUpdateUrl, con))
+                { con.Open();
+
+                    //passa os valores dos parametros
+                    cmd.Parameters.AddWithValue("@Nome", genero.Nome);
+                    cmd.Parameters.AddWithValue("@IdGenero", id);
+                    cmd.ExecuteNonQuery();
+
+
+                }
+
+                //throw new NotImplementedException();
+            }
         }
 
         /// <summary>
