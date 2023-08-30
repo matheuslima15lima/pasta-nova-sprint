@@ -15,7 +15,7 @@ namespace webapi.filmes.tarde.Repositories
         ///  -sqlServer : User Id = sa; pwd= senha
         /// </summary>
         private readonly string StringConexao = "Data Source = NOTE18-S15; Initial Catalog = Filmes_Tarde; User Id = sa; pwd = Senai@134";
-       
+
         /// <summary>
         /// Atualizar um genero passando seu id pelo corpo da requisicao
         /// </summary>
@@ -26,9 +26,9 @@ namespace webapi.filmes.tarde.Repositories
             {
                 String queryUpdateIdBody = $"UPDATE Genero SET Nome = @Nome  WHERE IdGenero = @IdGenero";
 
-               
+
                 using (SqlCommand cmd = new SqlCommand(queryUpdateIdBody, con))
-               {
+                {
                     con.Open();
 
                     //passa os valores dos parametros
@@ -36,9 +36,9 @@ namespace webapi.filmes.tarde.Repositories
                     cmd.Parameters.AddWithValue("@IdGenero", genero.IdGenero);
                     cmd.ExecuteNonQuery();
 
-                   
-               }
-                
+
+                }
+
                 //throw new NotImplementedException();
             }
         }
@@ -51,7 +51,8 @@ namespace webapi.filmes.tarde.Repositories
 
 
                 using (SqlCommand cmd = new SqlCommand(queryUpdateUrl, con))
-                { con.Open();
+                {
+                    con.Open();
 
                     //passa os valores dos parametros
                     cmd.Parameters.AddWithValue("@Nome", genero.Nome);
@@ -72,8 +73,6 @@ namespace webapi.filmes.tarde.Repositories
         /// <returns></returns>
         public GeneroDomain BuscarPorId(int id)
         {
-
-           
 
             using SqlConnection con = new(StringConexao);
 
@@ -99,7 +98,7 @@ namespace webapi.filmes.tarde.Repositories
                     Nome = rdr["Nome"].ToString()
                 };
 
-            return generoBuscado;
+                return generoBuscado;
             }
             return null;
             //return genero.Nome;
@@ -203,5 +202,5 @@ namespace webapi.filmes.tarde.Repositories
         }
 
     }
-   
+
 }

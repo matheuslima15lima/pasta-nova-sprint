@@ -72,5 +72,104 @@ namespace webapi.filmes.tarde.Controllers
         }
 
 
+        /// <summary>
+        /// endpoint que acessa o metodo de cadastrar filmes
+        /// </summary>
+        /// <param name="novoFilme">Objeto recebido na requisicao</param>
+        /// <returns>status code</returns>
+        [HttpPost]
+        public IActionResult Post(FilmeDomain novoFilme)
+        {
+            try
+            {
+                //faz a chamada para o metodo cadastrado
+                _filmeRepository.Cadastrar(novoFilme);
+
+                //retorna um status code
+                return Created("objeto criado", novoFilme);
+
+
+            }
+            catch (Exception erro)
+            {
+                //retorna um status code 400 - BadRequest e a mensagem de erro 
+                return BadRequest(erro.Message);
+            }
+        }
+
+
+        /// <summary>
+        /// Metodo de deletar Filmes
+        /// </summary>
+        /// <param name="id"> Acha o filme pelo id</param>
+        /// <returns></returns>
+        //tem que expecificar que vai passar um id
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                _filmeRepository.Deletar(id);
+
+                //return Ok(id);
+
+                return StatusCode(204);
+            }
+            catch (Exception erro)
+            {
+
+                return BadRequest(erro.Message);
+            }
+
+        }
+        [HttpGet("{Id}")]
+        public IActionResult BuscarPorId(int Id)
+        {
+            try
+            {
+                FilmeDomain filmeBuscado = _filmeRepository.BuscarPorId(Id);
+
+                if (filmeBuscado == null)
+                {
+                    return NotFound("id não encontrado!!!");
+
+                }
+                return StatusCode(200, filmeBuscado);
+
+            }
+            catch (Exception erro)
+            {
+
+                return BadRequest(erro.Message);
+            }
+        }
+
+        [HttpPut]
+        public IActionResult PutIdBody(FilmeDomain filme) 
+        {
+            try
+            {
+                FilmeDomain filmeBuscado = _filmeRepository.BuscarPorId(filme.IdFilme);
+                if(filmeBuscado != null)
+                {
+                    try
+                    {
+                        _filmeRepository.AtualizarIdCorpo(filme);
+                        return NoContent();
+                    }
+                    catch (Exception erro)
+                    {
+
+                        throw;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }

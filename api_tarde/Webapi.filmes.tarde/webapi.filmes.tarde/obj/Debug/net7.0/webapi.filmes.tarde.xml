@@ -27,6 +27,20 @@
             </summary>
             <returns>Lista de gêneros e um status code</returns>
         </member>
+        <member name="M:webapi.filmes.tarde.Controllers.FilmeController.Post(webapi.filmes.tarde.Domains.FilmeDomain)">
+            <summary>
+            endpoint que acessa o metodo de cadastrar filmes
+            </summary>
+            <param name="novoFilme">Objeto recebido na requisicao</param>
+            <returns>status code</returns>
+        </member>
+        <member name="M:webapi.filmes.tarde.Controllers.FilmeController.Delete(System.Int32)">
+            <summary>
+            Metodo de deletar Filmes
+            </summary>
+            <param name="id"> Acha o filme pelo id</param>
+            <returns></returns>
+        </member>
         <member name="T:webapi.filmes.tarde.Controllers.GenerosController">
             <summary>
             Define que a rota de uma requisicao sera no seguinte formato
