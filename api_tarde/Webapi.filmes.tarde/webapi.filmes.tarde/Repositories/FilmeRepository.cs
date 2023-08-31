@@ -15,14 +15,15 @@ namespace webapi.filmes.tarde.Repositories
         {
             using (SqlConnection con = new SqlConnection(StringConexao))
             {
-                String queryUpdateIdBody = $"Update Filme SET Titulo = @Titulo WHERE IdFilme = @IdFilme";
+                String queryUpdateIdBody = $"Update Filme SET IdGenero = @IdGenero, Titulo = @Titulo WHERE IdFilme = @IdFilme";
 
-                using (SqlCommand cmd = new SqlCommand(queryUpdateIdBody,con))
+                using (SqlCommand cmd = new SqlCommand(queryUpdateIdBody, con))
                 {
                     con.Open();
 
                     cmd.Parameters.AddWithValue("@Titulo", filme.Titulo);
                     cmd.Parameters.AddWithValue("@IdFilme", filme.IdFilme);
+                    cmd.Parameters.AddWithValue("@IdGenero", filme.IdGenero);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -30,7 +31,23 @@ namespace webapi.filmes.tarde.Repositories
 
         public void AtualizarIdUrl(int Id, FilmeDomain filme)
         {
-            throw new NotImplementedException();
+            using (SqlConnection con = new SqlConnection(StringConexao))
+            {
+                String queryUpdateUrl = $"Update Filme SET IdGenero= @IdGenero, Titulo = @Titulo WHERE IdFilme = @IdFilme";
+
+                using (SqlCommand cmd = new SqlCommand(queryUpdateUrl, con))
+                {
+                    con.Open();
+
+                    
+                    cmd.Parameters.AddWithValue("@Titulo", filme.Titulo);
+                    cmd.Parameters.AddWithValue("@IdGenero", filme.IdGenero);
+                    cmd.Parameters.AddWithValue("@IdFilme", Id);
+
+                    cmd.ExecuteNonQuery();
+
+                }
+            }
         }
 
         public FilmeDomain BuscarPorId(int Id)
@@ -51,7 +68,7 @@ namespace webapi.filmes.tarde.Repositories
             if (rdr.Read())
             {
 
-               GeneroDomain genero = new GeneroDomain()
+                GeneroDomain genero = new GeneroDomain()
                 {
                     IdGenero = Convert.ToInt32(rdr["IdGenero"]),
 
@@ -69,7 +86,7 @@ namespace webapi.filmes.tarde.Repositories
 
                     IdGenero = Convert.ToInt32(rdr["IdGenero"]),
 
-                    Genero = genero 
+                    Genero = genero
 
                 };
 
@@ -181,7 +198,7 @@ namespace webapi.filmes.tarde.Repositories
 
                 };
 
-                
+
 
 
 

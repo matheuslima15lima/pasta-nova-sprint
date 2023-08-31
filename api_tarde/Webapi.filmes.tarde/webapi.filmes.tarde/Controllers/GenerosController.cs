@@ -92,6 +92,11 @@ namespace webapi.filmes.tarde.Controllers
         }
 
         //tem que expecificar que vai passar um id
+        /// <summary>
+        /// deletando usuario
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
@@ -136,6 +141,12 @@ namespace webapi.filmes.tarde.Controllers
             }
         }
 
+
+        /// <summary>
+        ///     atualiza por id passando id pelo corpo
+        /// </summary>
+        /// <param name="genero"></param>
+        /// <returns></returns>
         [HttpPut]
         public IActionResult PutIdBody(GeneroDomain genero)
         {
@@ -168,6 +179,13 @@ namespace webapi.filmes.tarde.Controllers
             }
         }
 
+
+        /// <summary>
+        /// atualiza pelo id passando pela url
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="genero"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public IActionResult PutIdUrl(int id,GeneroDomain genero)
         {

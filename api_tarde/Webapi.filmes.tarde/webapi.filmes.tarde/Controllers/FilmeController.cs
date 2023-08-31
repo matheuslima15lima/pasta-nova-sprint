@@ -122,6 +122,12 @@ namespace webapi.filmes.tarde.Controllers
             }
 
         }
+
+        /// <summary>
+        /// EndPoint Que busca filme por id
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
         [HttpGet("{Id}")]
         public IActionResult BuscarPorId(int Id)
         {
@@ -144,6 +150,12 @@ namespace webapi.filmes.tarde.Controllers
             }
         }
 
+
+        /// <summary>
+        /// EndPoint De atualizacao por id (Corpo)
+        /// </summary>
+        /// <param name="filme"></param>
+        /// <returns></returns>
         [HttpPut]
         public IActionResult PutIdBody(FilmeDomain filme) 
         {
@@ -160,16 +172,62 @@ namespace webapi.filmes.tarde.Controllers
                     catch (Exception erro)
                     {
 
-                        throw;
+                        return BadRequest(erro.Message);
                     }
                 }
+                return NotFound("filme não encontrado!!!");
             }
-            catch (Exception)
+            catch (Exception erro)
             {
 
-                throw;
+               return BadRequest(erro.Message);
             }
         }
 
+        /// <summary>
+        /// EndPoint de atualizacao por id passando id pela url
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <param name="filme"></param>
+        /// <returns></returns>
+        [HttpPut("{Id}")]
+        public IActionResult PutIdUrl(int Id,FilmeDomain filme)
+        {
+            try
+            {
+                FilmeDomain filmeBuscado = _filmeRepository.BuscarPorId(Id);
+
+                if(filmeBuscado != null)
+                {
+                    try
+                    {
+                        _filmeRepository.AtualizarIdUrl(Id, filme);
+
+                        return Ok(filme);
+                        
+
+                    }
+                    catch (Exception erro)
+                    {
+
+                        return BadRequest(erro.Message);
+                    }
+                   
+                }
+                return NotFound("Filme não encontrado !!!");
+
+            }
+            catch (Exception erro)
+            {
+
+                return BadRequest(erro.Message);
+            }
+            
+
+            
+        
+        }
+
     }
+
 }

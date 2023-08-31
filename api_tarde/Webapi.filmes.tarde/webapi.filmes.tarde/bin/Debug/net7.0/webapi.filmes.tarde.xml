@@ -41,6 +41,28 @@
             <param name="id"> Acha o filme pelo id</param>
             <returns></returns>
         </member>
+        <member name="M:webapi.filmes.tarde.Controllers.FilmeController.BuscarPorId(System.Int32)">
+            <summary>
+            EndPoint Que busca filme por id
+            </summary>
+            <param name="Id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:webapi.filmes.tarde.Controllers.FilmeController.PutIdBody(webapi.filmes.tarde.Domains.FilmeDomain)">
+            <summary>
+            EndPoint De atualizacao por id (Corpo)
+            </summary>
+            <param name="filme"></param>
+            <returns></returns>
+        </member>
+        <member name="M:webapi.filmes.tarde.Controllers.FilmeController.PutIdUrl(System.Int32,webapi.filmes.tarde.Domains.FilmeDomain)">
+            <summary>
+            EndPoint de atualizacao por id passando id pela url
+            </summary>
+            <param name="Id"></param>
+            <param name="filme"></param>
+            <returns></returns>
+        </member>
         <member name="T:webapi.filmes.tarde.Controllers.GenerosController">
             <summary>
             Define que a rota de uma requisicao sera no seguinte formato
