@@ -93,6 +93,13 @@
             <param name="novoGenero">Objeto recebido na requisicao</param>
             <returns>status code</returns>
         </member>
+        <member name="M:webapi.filmes.tarde.Controllers.GenerosController.Delete(System.Int32)">
+            <summary>
+            deletando usuario
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <member name="M:webapi.filmes.tarde.Controllers.GenerosController.BuscarPorId(System.Int32)">
             <summary>
             endpoint que busca por id
@@ -100,9 +107,29 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="M:webapi.filmes.tarde.Controllers.GenerosController.PutIdBody(webapi.filmes.tarde.Domains.GeneroDomain)">
+            <summary>
+                atualiza por id passando id pelo corpo
+            </summary>
+            <param name="genero"></param>
+            <returns></returns>
+        </member>
+        <member name="M:webapi.filmes.tarde.Controllers.GenerosController.PutIdUrl(System.Int32,webapi.filmes.tarde.Domains.GeneroDomain)">
+            <summary>
+            atualiza pelo id passando pela url
+            </summary>
+            <param name="id"></param>
+            <param name="genero"></param>
+            <returns></returns>
+        </member>
         <member name="T:webapi.filmes.tarde.Domains.GeneroDomain">
             <summary>
             Classe que representa a entidade(Tabela) Genero
+            </summary>
+        </member>
+        <member name="T:webapi.filmes.tarde.Domains.UsuarioDomain">
+            <summary>
+            Classe que representa a entidade(tabela) Usuario
             </summary>
         </member>
         <member name="T:webapi.filmes.tarde.Interfaces.IGeneroRepository">
@@ -148,6 +175,14 @@
             Deletar um gênero existente
             </summary>
             <param name="id">Id do objeto a ser deletado</param>
+        </member>
+        <member name="M:webapi.filmes.tarde.Interfaces.IUsuarioRepository.Login(System.String,System.String)">
+            <summary>
+            Metodo que busca um usuario por email e senha
+            </summary>
+            <param name="email">email do usuario</param>
+            <param name="senha">senha do usuario</param>
+            <returns>Objeto que foi buscado</returns>
         </member>
         <member name="F:webapi.filmes.tarde.Repositories.GeneroRepository.StringConexao">
             <summary>
