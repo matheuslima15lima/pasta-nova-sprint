@@ -40,8 +40,8 @@ namespace webapi.filmes.tarde.Controllers
                 var Claims = new[]
                {
                     //formato da Claim(tipo, valor)
-                    new Claim(JwtRegisteredClaimNames.Jti, usuarioBuscado.IdUsuario.ToString()),
-                    new Claim(JwtRegisteredClaimNames.Email, usuarioBuscado.Email),
+                    new Claim(Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames.Jti, usuarioBuscado.IdUsuario.ToString()),
+                    new Claim(Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames.Email, usuarioBuscado.Email),
                     new Claim(ClaimTypes.Role, usuarioBuscado.Permissao),
                     //existe a possibilidade de criar uma claim personalizada
                     new Claim("Claim Perso","ValorPersonalizado")
