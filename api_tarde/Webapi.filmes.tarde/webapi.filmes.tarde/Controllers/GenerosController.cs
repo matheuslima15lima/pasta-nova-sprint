@@ -20,6 +20,8 @@ namespace webapi.filmes.tarde.Controllers
 
     /// DEFINE QUE O TIPO DE RESPOSTA DA API É JSON
     [Produces("application/json")]
+
+   
     public class GenerosController : ControllerBase
     {
         /// <summary>
@@ -40,7 +42,7 @@ namespace webapi.filmes.tarde.Controllers
         /// </summary>
         /// <returns>Lista de gêneros e um status code</returns>
         [HttpGet]
-        [Authorize]//precisa estar logado para acessar a rota
+        [Authorize (Roles = "Administrador")]//precisa estar logado para acessar a rota
         public IActionResult Get()
         {
             try
