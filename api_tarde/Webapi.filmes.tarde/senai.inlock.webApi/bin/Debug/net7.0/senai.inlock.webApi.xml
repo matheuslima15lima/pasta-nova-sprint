@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>senai.inlock.webApi</name>
+    </assembly>
+    <members>
+        <member name="M:senai.inlock.webApi.Controllers.EstudioController.Get">
+            <summary>
+            EndPoint de listar Estudios
+            </summary>
+            <returns>Lista De estudios</returns>
+        </member>
+        <member name="M:senai.inlock.webApi.Controllers.EstudioController.Post(senai.inlock.webApi.Domains.EstudioDomain)">
+            <summary>
+            EndPoint de cadastrar estudios
+            </summary>
+            <param name="novoEstudio">Estudio a ser cadastrado</param>
+            <returns> mensagem de objeto criado</returns>
+        </member>
+        <member name="T:senai.inlock.webApi.Domains.EstudioDomain">
+            <summary>
+            Classe que representa a tabela de estudio
+            </summary>
+        </member>
+        <member name="M:senai.inlock.webApi.Interfaces.IEstudioRepository.Cadastrar(senai.inlock.webApi.Domains.EstudioDomain)">
+            <summary>
+            cadastrar um novo estudio
+            </summary>
+            <param name="novoEstudio">Novo estudio a ser cadastrado</param>
+        </member>
+        <member name="M:senai.inlock.webApi.Interfaces.IUsuarioRepository.Login(System.String,System.String)">
+            <summary>
+            Método que busca um usuario por email e senha 
+            </summary>
+            <param name="email">email do usuario</param>
+            <param name="senha">sena do usuario</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

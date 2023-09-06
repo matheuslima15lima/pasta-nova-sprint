@@ -11,7 +11,7 @@ namespace webapi.filmes.tarde.Interfaces
         //TipoDeRetorno NomeMetodo(TipoParametro NomeParametro)
 
         /// <summary>
-        /// Cadastar umnovo genero
+        /// Cadastar um novo genero
         /// </summary>
         /// <param name="novoGenero">Objeto que será cadastrado</param>
         void Cadastrar(GeneroDomain novoGenero);
