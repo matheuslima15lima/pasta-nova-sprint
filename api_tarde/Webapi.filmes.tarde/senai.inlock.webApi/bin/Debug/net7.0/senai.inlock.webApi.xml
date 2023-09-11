@@ -17,6 +17,13 @@
             <param name="novoEstudio">Estudio a ser cadastrado</param>
             <returns> mensagem de objeto criado</returns>
         </member>
+        <member name="M:senai.inlock.webApi.Controllers.JogoController.Post(senai.inlock.webApi.Domains.JogoDomain)">
+            <summary>
+            endpoint de cadastrar jogos
+            </summary>
+            <param name="novoJogo"></param>
+            <returns></returns>
+        </member>
         <member name="T:senai.inlock.webApi.Domains.EstudioDomain">
             <summary>
             Classe que representa a tabela de estudio

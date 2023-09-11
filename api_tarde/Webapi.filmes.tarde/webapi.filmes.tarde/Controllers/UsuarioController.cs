@@ -57,27 +57,27 @@ namespace webapi.filmes.tarde.Controllers
                 var token = new JwtSecurityToken
                 (
                     //emissor do token
-                    issuer:"webapi.filmes.tarde",
+                    issuer: "webapi.filmes.tarde",
 
                     //destinatário
                     audience: "webapi.filmes.tarde",
 
                     //dados definidos nas claims (Payload)
-                    claims : Claims,
+                    claims: Claims,
 
                     //tempo de expiração
                     expires: DateTime.Now.AddMinutes(5),
 
                     //credenciais do token
-                    signingCredentials : creds
+                    signingCredentials: creds
 
                 );
 
                 //5º - retornar o token criado
                 return Ok(new
                 {
-                   token = new JwtSecurityTokenHandler().WriteToken(token)
-                } );
+                    token = new JwtSecurityTokenHandler().WriteToken(token)
+                });
                 //return Ok(usuarioBuscado);
 
             }

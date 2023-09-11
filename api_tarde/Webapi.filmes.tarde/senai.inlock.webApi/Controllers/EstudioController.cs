@@ -61,7 +61,24 @@ namespace senai.inlock.webApi.Controllers
                 return BadRequest(erro.Message);
             }
         }
-        //[HttpDelete]
+        [HttpDelete("{id}")]
+        
+        public IActionResult Delete(int id) 
+        {
+            try
+            {
+                _estudioRepository.Deletar(id);
+
+                return StatusCode(204);
+            }
+            catch (Exception erro)
+            {
+
+                return BadRequest(erro.Message);
+            }
+        
+        }
+
 
     }
 }

@@ -39,7 +39,7 @@ namespace webapi.filmes.tarde.Repositories
                 {
                     con.Open();
 
-                    
+
                     cmd.Parameters.AddWithValue("@Titulo", filme.Titulo);
                     cmd.Parameters.AddWithValue("@IdGenero", filme.IdGenero);
                     cmd.Parameters.AddWithValue("@IdFilme", Id);
@@ -172,10 +172,10 @@ namespace webapi.filmes.tarde.Repositories
                         //Instancia um objeto do tipo FilmeDomain
                         FilmeDomain filme = new FilmeDomain()
                         {
-                            //atribui a propriedade Id o valor da primeira coluna da tabela
+                            //atribui a propriedade Id o valor da primeira            coluna da tabela
                             IdFilme = Convert.ToInt32(rdr[0]),
 
-                            //Atribui a propriedade Titulo ao valor da coluna Titulo
+                            //Atribui a propriedade Titulo ao valor da coluna           Titulo
                             Titulo = rdr["Titulo"].ToString(),
                             IdGenero = Convert.ToInt32(rdr[1]),
 

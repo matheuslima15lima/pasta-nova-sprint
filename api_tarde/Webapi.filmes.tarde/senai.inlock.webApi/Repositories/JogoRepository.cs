@@ -11,12 +11,16 @@ namespace senai.inlock.webApi.Repositories
         {
             using (SqlConnection con = new(StringConexao))
             {
-                String queryInsert = "INSERT INTO Jogo(Nome,IdEstudio) VALUES(@Nome,@IdEstudio)";
+                String queryInsert = "INSERT INTO Jogo(Nome,IdEstudio,Valor,Descricao,DataLancamento) VALUES(@Nome,@IdEstudio,@Valor,@Descricao,@DataLancamento)";
 
                 using(SqlCommand cmd = new SqlCommand(queryInsert, con)) 
                 {
                     cmd.Parameters.AddWithValue("@Nome", novoJogo.Nome);
                     cmd.Parameters.AddWithValue("@IdEstudio", novoJogo.IdEstudio);
+                    cmd.Parameters.AddWithValue("@Valor", novoJogo.Valor);
+                    cmd.Parameters.AddWithValue("@Descricao", novoJogo.Descricao);
+                    cmd.Parameters.AddWithValue("@DataLancamento", novoJogo.DataLancamento);
+
 
                     con.Open();
 
@@ -28,12 +32,63 @@ namespace senai.inlock.webApi.Repositories
 
         public void Deletar(int id)
         {
-            throw new NotImplementedException();
+            using (SqlConnection con = new SqlConnection(StringConexao))
+            {
+                String queryDelete = $"DELETE FROM Jogo WHERE {id} = IdJogo";
+
+                using (SqlCommand cmd = new SqlCommand(queryDelete, con))
+                {
+                    con.Open();
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            
         }
 
         public List<JogoDomain> ListarTodos()
         {
-            throw new NotImplementedException();
+            List<JogoDomain> ListaJogos = new List<JogoDomain>();
+
+            using (SqlConnection con = new SqlConnection(StringConexao))
+            {
+                string querySelectAll = "Select IdJogo, Estudio.IdEstudio, Descricao, Valor, Jogo.Nome as NomeJogo, Estudio.Nome as NomeEstudio From Jogo Inner Join Estudio on Jogo.IdEstudio = Estudio.IdEstudio  ";
+
+                con.Open();
+
+                SqlDataReader rdr;
+                
+                using (SqlCommand cmd = new SqlCommand(querySelectAll, con))
+                {
+                    rdr = cmd.ExecuteReader();
+
+                    while (rdr.Read()) 
+                    {
+                        JogoDomain jogo = new JogoDomain()
+                        {
+                            IdJogo = Convert.ToInt32(rdr[0]),
+
+                            Nome = rdr["NomeJogo"].ToString(),
+                            IdEstudio = Convert.ToInt32(rdr[1]),
+                            //Descricao = rdr["Descricao"].ToString(),
+                           
+
+
+                            Estudio = new EstudioDomain() 
+                            {
+                                IdEstudio= Convert.ToInt32(rdr[1]),
+                                Nome = rdr["NomeEstudio"].ToString()
+                            }
+
+                        };
+
+                        ListaJogos.Add(jogo);
+
+                    }
+                };
+            }
+            return ListaJogos;
         }
+
     }
 }

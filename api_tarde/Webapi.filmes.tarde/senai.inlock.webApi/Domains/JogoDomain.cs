@@ -14,6 +14,8 @@ namespace senai.inlock.webApi.Domains
         public int IdEstudio { get; set; }
 
         public float Valor { get; set; }
+
+        public DateTime DataLancamento { get; set; }
         
         //referência para classe estudio
         public EstudioDomain? Estudio { get; set; }
