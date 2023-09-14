@@ -20,7 +20,7 @@ namespace Webapi.inlock.CodeFirst.Domains
 
         [Column(TypeName = "DATE")]
         [Required(ErrorMessage = "Data de lancamento obrigatorio")]
-        public string? DataLancamento { get; set; }
+        public DateTime? DataLancamento { get; set; }
 
 
         [Column(TypeName = "DECIMAL(4,2)")]
