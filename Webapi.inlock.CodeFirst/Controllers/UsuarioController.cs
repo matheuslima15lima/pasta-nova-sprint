@@ -33,11 +33,18 @@ namespace Webapi.inlock.CodeFirst.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetByEmailAndPassword()
+        public IActionResult GetByEmailAndPassword(string Email, string Senha)
         {
             try
             {
+                Usuario usuarioAchado = _usuarioRepository.BuscarUsuario(Email, Senha);
 
+                if (usuarioAchado != null)
+                {
+                    return Ok(usuarioAchado);
+                }
+
+                return NotFound();
             }
             catch (Exception)
             {

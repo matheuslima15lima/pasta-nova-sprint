@@ -75,3 +75,4 @@ C:\Users\46447568812\Desktop\pasta-nova-sprint\Webapi.inlock.CodeFirst\obj\Debug
 C:\Users\46447568812\Desktop\pasta-nova-sprint\Webapi.inlock.CodeFirst\obj\Debug\net7.0\Webapi.inlock.CodeFirst.genruntimeconfig.cache
 C:\Users\46447568812\Desktop\pasta-nova-sprint\Webapi.inlock.CodeFirst\obj\Debug\net7.0\ref\Webapi.inlock.CodeFirst.dll
 C:\Users\46447568812\Desktop\pasta-nova-sprint\Webapi.inlock.CodeFirst\bin\Debug\net7.0\BCrypt.Net-Next.dll
+C:\Users\46447568812\Desktop\pasta-nova-sprint\Webapi.inlock.CodeFirst\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

@@ -11,7 +11,7 @@ namespace Webapi.inlock.CodeFirst.Domains
 
         [Column(TypeName = "VARCHAR(100)")]
         [Required(ErrorMessage = "usuario obrigatorio")]
-        public string? Titulo { get;}
+        public string? Titulo { get; set; }
 
     }
 }
